@@ -330,6 +330,93 @@
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--line);color:var(--muted-2);font-size:.86rem;flex-wrap:wrap;gap:14px}
   .flag{color:var(--accent-3);font-weight:500}
 
+  /* ===== HERO TRUST ROW ===== */
+  .trust-row{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .trust-row span{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+  .trust-row i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);flex-shrink:0}
+  @media(max-width:560px){.trust-row{gap:14px;margin-top:24px}.trust-row span{font-size:10.5px}}
+
+  /* ===== INTERACTIVE DEMO CHIPS ===== */
+  .demo-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .demo-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:100px;cursor:pointer;
+    border:1px solid var(--line-2);background:rgba(255,255,255,.03);color:var(--muted);font-size:.9rem;font-weight:500;
+    transition:.3s var(--ease);font-family:'Inter'}
+  .demo-chip:hover{border-color:var(--accent);color:var(--text);background:rgba(61,242,255,.06);transform:translateY(-2px)}
+  .demo-chip.active{border-color:transparent;color:#04121a;background:linear-gradient(100deg,var(--accent),var(--accent-2));box-shadow:0 8px 24px -10px var(--glow)}
+  .demo-chip .mic{font-size:.8rem;opacity:.8}
+  .demo-hint{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin:22px 0 2px}
+  /* typing caret for live demo */
+  .caret{display:inline-block;width:8px;height:1.05em;background:var(--accent);margin-left:2px;vertical-align:-2px;animation:blink 1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .term-status{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted-2);display:flex;align-items:center;gap:7px}
+  .term-status .sdot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 1.6s infinite}
+
+  /* ===== COMPARISON ===== */
+  .compare{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:rgba(10,14,22,.5);backdrop-filter:blur(6px)}
+  .compare .crow{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;align-items:center}
+  .compare .crow+.crow{border-top:1px solid var(--line)}
+  .compare .chead{background:rgba(61,242,255,.04)}
+  .compare .cell{padding:18px 20px;font-size:.95rem;color:var(--muted);font-weight:300}
+  .compare .cell.feat{color:var(--text);font-weight:500;font-family:'Sora'}
+  .compare .chead .cell{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);font-weight:500}
+  .compare .chead .cell.us{color:var(--accent)}
+  .compare .col-us{background:linear-gradient(180deg,rgba(61,242,255,.07),rgba(61,242,255,.02));position:relative}
+  .compare .yes{color:var(--accent);font-weight:600}
+  .compare .no{color:var(--muted-2)}
+  .compare .partial{color:#d8b46a}
+  @media(max-width:760px){
+    .compare{overflow-x:auto}
+    .compare .crow{grid-template-columns:1.3fr .8fr .8fr .8fr;min-width:560px}
+    .compare .cell{padding:14px 14px;font-size:.86rem}
+  }
+
+  /* ===== WHY NOW BAND ===== */
+  .whynow{border:1px solid var(--line);border-radius:24px;padding:46px;position:relative;overflow:hidden;
+    background:radial-gradient(120% 140% at 50% 0%,rgba(106,123,255,.10),transparent 55%),var(--panel)}
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:34px}
+  .pillar h4{font-family:'Sora';font-size:1.05rem;margin-bottom:8px;display:flex;align-items:center;gap:9px}
+  .pillar h4 .pd{width:8px;height:8px;border-radius:2px;background:linear-gradient(120deg,var(--accent),var(--accent-2));box-shadow:0 0 10px -2px var(--glow)}
+  .pillar p{color:var(--muted);font-size:.92rem;font-weight:300}
+  @media(max-width:760px){.whynow{padding:30px}.pillars{grid-template-columns:1fr 1fr;gap:22px}}
+  @media(max-width:460px){.pillars{grid-template-columns:1fr}}
+
+  /* ===== FAQ ===== */
+  .faq-list{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
+  .faq-item{border:1px solid var(--line);border-radius:16px;background:rgba(10,14,22,.5);padding:0 22px;transition:border-color .3s,background .3s;height:fit-content}
+  .faq-item:hover{border-color:var(--line-2)}
+  .faq-item.open{border-color:rgba(61,242,255,.4);background:rgba(61,242,255,.04)}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:22px 0;
+    font-family:'Sora';font-size:1.04rem;font-weight:600;color:var(--text);list-style:none}
+  .faq-q::-webkit-details-marker{display:none}
+  .faq-q .pm{position:relative;width:16px;height:16px;flex-shrink:0}
+  .faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;background:var(--accent);transition:transform .3s var(--ease)}
+  .faq-q .pm::before{top:7px;left:0;width:16px;height:2px}
+  .faq-q .pm::after{left:7px;top:0;width:2px;height:16px}
+  .faq-item.open .pm::after{transform:scaleY(0)}
+  .faq-a{color:var(--muted);font-size:.96rem;font-weight:300;line-height:1.7;
+    max-height:0;overflow:hidden;transition:max-height .4s var(--ease),opacity .3s,padding .3s}
+  .faq-a.show{max-height:320px;padding:0 0 22px;opacity:1}
+  @media(max-width:760px){.faq-list{grid-template-columns:1fr}}
+
+  /* ===== CTA UPGRADES ===== */
+  .cta-incentives{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px auto 4px;max-width:740px}
+  .cta-incentives .inc{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:14px;
+    border:1px solid var(--line);background:rgba(10,14,22,.6);font-size:.88rem;color:var(--muted)}
+  .cta-incentives .inc svg{color:var(--accent);flex-shrink:0}
+  .cta-incentives .inc b{color:var(--text);font-weight:600}
+  .signup-meta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:24px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted)}
+  .signup-meta .av{display:flex;margin-right:4px}
+  .signup-meta .av span{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bg);margin-left:-7px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-3))}
+  .signup-meta .av span:nth-child(2){background:linear-gradient(135deg,var(--accent-2),var(--accent))}
+  .signup-meta .av span:nth-child(3){background:linear-gradient(135deg,var(--accent-3),var(--accent-2))}
+  .signup-meta b{color:var(--accent);font-weight:600}
+  .form-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;
+    font-size:.8rem;color:var(--muted-2)}
+  .form-trust span{display:inline-flex;align-items:center;gap:6px}
+  .form-trust svg{color:var(--accent)}
+
   /* ===== RESPONSIVE ===== */
   @media (max-width:900px){
     .nav-links{display:none}
@@ -389,9 +476,10 @@
     <nav class="nav-links">
       <a href="#capabilities">Capabilities</a>
       <a href="#how">How it works</a>
-      <a href="#usecases">Use cases</a>
+      <a href="#why">Why Jarvis</a>
       <a href="#integrations">Integrations</a>
       <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
       <a href="#" class="btn btn-ghost">Sign in</a>
@@ -404,9 +492,11 @@
 <div class="drawer" id="drawer">
   <a href="#capabilities">Capabilities</a>
   <a href="#how">How it works</a>
+  <a href="#why">Why Jarvis</a>
   <a href="#usecases">Use cases</a>
   <a href="#integrations">Integrations</a>
   <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
   <a href="#cta" class="btn btn-primary">Request access</a>
 </div>
 
@@ -436,10 +526,15 @@
       <span class="line"><span class="w">You</span> <span class="w">grew</span> <span class="w">up</span> <span class="w">wanting</span> <span class="w">one.</span></span>
       <span class="line grad-text"><span class="w">Now</span> <span class="w">you</span> <span class="w">can</span> <span class="w">have</span> <span class="w">it.</span></span>
     </h1>
-    <p class="sub">Jarvis is a voice-first personal AI — the assistant from the films, built for your real life. It talks with you, takes action across your apps and devices, remembers what matters, and runs on your terms.</p>
+    <p class="sub">The voice-first personal AI from the films, built for your real life. Say the word and it talks back, takes action across your apps and devices, remembers what matters — and can run entirely on your own machine.</p>
     <div class="cta-row">
-      <a href="#cta" class="btn btn-primary">Request early access →</a>
-      <a href="#how" class="btn btn-ghost">See how it works</a>
+      <a href="#cta" class="btn btn-primary">Claim your founding spot →</a>
+      <a href="#how" class="btn btn-ghost">▶ See it in action</a>
+    </div>
+    <div class="trust-row" aria-label="Highlights">
+      <span><i></i>Talks back in well under a second</span>
+      <span><i></i>Runs 100% on-device — private by default</span>
+      <span><i></i>Acts across 200+ tools via MCP</span>
     </div>
   </div>
   <div class="scroll-hint"><span>Scroll</span><span class="line"></span></div>
@@ -510,20 +605,24 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">How it works</span>
-      <h2 class="mreveal">From a sentence to <span class="grad-text">shipped.</span></h2>
+      <h2 class="mreveal">Say it once. <span class="grad-text">It takes it from there.</span></h2>
+      <p>Tap a command and watch the voice loop run — the same four beats every time: wake, understand, act, remember.</p>
     </div>
+
+    <div class="demo-chips reveal" id="demoChips" role="tablist" aria-label="Try a command">
+      <button class="demo-chip active" data-scn="morning" type="button"><span class="mic">🎙</span> "Catch me up"</button>
+      <button class="demo-chip" data-scn="focus" type="button"><span class="mic">🎙</span> "Dim the office &amp; focus me"</button>
+      <button class="demo-chip" data-scn="inbox" type="button"><span class="mic">🎙</span> "Clear my inbox"</button>
+      <button class="demo-chip" data-scn="home" type="button"><span class="mic">🎙</span> "Lock up for the night"</button>
+    </div>
+
     <div class="story-grid">
       <div class="story-visual brackets">
         <div class="terminal">
-          <div class="term-bar"><i></i><i></i><i></i><span class="ttl">jarvis · listening</span>
+          <div class="term-bar"><i></i><i></i><i></i><span class="ttl">jarvis · <span id="termState">listening</span></span>
             <span class="voicewave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
           </div>
-          <div class="term-body" id="termBody">
-            <div class="term-line" data-i="0"><span class="who">You 🎙</span><span class="msg">"Hey Jarvis — dim the office, play something focused, and what's first on my plate?"</span></div>
-            <div class="term-line" data-i="1"><span class="who j">Jarvis</span><span class="msg">Lights down to 30%, focus playlist on.<br><span class="term-tag">home · 2 devices</span> <span class="term-tag">spotify</span></span></div>
-            <div class="term-line" data-i="2"><span class="who j">Jarvis</span><span class="msg">First up: the contract reply to Dana. I drafted it from your last thread — want to hear it?<br><span class="term-tag">memory · recalled context</span></span></div>
-            <div class="term-line" data-i="3"><span class="who j">Jarvis</span><span class="msg">Sent. Calendar's clear till 11, so I held that block for deep work.<br><span class="term-tag">awaiting nothing — done</span></span></div>
-          </div>
+          <div class="term-body" id="termBody"></div>
         </div>
       </div>
       <div class="story-steps" id="storySteps">
@@ -564,6 +663,56 @@
       <div class="metric"><div class="num" data-target="100" data-suffix="%">0%</div><div class="lbl">on-device option — your data never leaves <span class="flag">[placeholder]</span></div></div>
       <div class="metric"><div class="num" data-target="200" data-suffix="+">0</div><div class="lbl">tools &amp; devices it can act on <span class="flag">[placeholder]</span></div></div>
       <div class="metric"><div class="num" data-target="24" data-suffix="/7">0</div><div class="lbl">always on, always listening for its name</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY JARVIS / COMPARISON -->
+<section class="block" id="why" style="padding-top:0">
+  <div class="sec-bg" aria-hidden="true"><div class="grid"></div><div class="aurora a2"></div></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why Jarvis</span>
+      <h2 class="mreveal">Voice assistants answer. <span class="grad-text">Jarvis acts.</span></h2>
+      <p>Siri and Alexa run canned commands. Chatbots wait in a tab for you to type. Jarvis is the first kind built to actually do the work — out loud, across your real tools, with memory of who you are.</p>
+    </div>
+    <div class="compare reveal" role="table" aria-label="How Jarvis compares">
+      <div class="crow chead" role="row">
+        <div class="cell" role="columnheader"></div>
+        <div class="cell us" role="columnheader">Jarvis</div>
+        <div class="cell" role="columnheader">Siri / Alexa</div>
+        <div class="cell" role="columnheader">Chatbots</div>
+      </div>
+      <div class="crow" role="row">
+        <div class="cell feat">Talks back naturally, hands-free</div>
+        <div class="cell col-us"><span class="yes">Conversational</span></div>
+        <div class="cell"><span class="partial">Rigid commands</span></div>
+        <div class="cell"><span class="no">Type in a tab</span></div>
+      </div>
+      <div class="crow" role="row">
+        <div class="cell feat">Takes real action across your apps</div>
+        <div class="cell col-us"><span class="yes">Agentic</span></div>
+        <div class="cell"><span class="partial">A few skills</span></div>
+        <div class="cell"><span class="no">Answers only</span></div>
+      </div>
+      <div class="crow" role="row">
+        <div class="cell feat">Remembers you across time</div>
+        <div class="cell col-us"><span class="yes">Persistent memory</span></div>
+        <div class="cell"><span class="no">Forgets instantly</span></div>
+        <div class="cell"><span class="partial">Per-chat at best</span></div>
+      </div>
+      <div class="crow" role="row">
+        <div class="cell feat">Connects to anything you use</div>
+        <div class="cell col-us"><span class="yes">Open MCP tools</span></div>
+        <div class="cell"><span class="no">Walled garden</span></div>
+        <div class="cell"><span class="partial">Limited plugins</span></div>
+      </div>
+      <div class="crow" role="row">
+        <div class="cell feat">Can run fully on your machine</div>
+        <div class="cell col-us"><span class="yes">On-device option</span></div>
+        <div class="cell"><span class="no">Cloud only</span></div>
+        <div class="cell"><span class="no">Cloud only</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -613,6 +762,37 @@
         <div class="ico">🌙</div>
         <h3>Wind-down</h3>
         <p>"What did I miss, and what's tomorrow?" A calm recap, the house set for night, and notes filed away into memory for next time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="whynow reveal brackets">
+      <div class="sec-head" style="margin-bottom:0;max-width:680px">
+        <span class="eyebrow">Why now</span>
+        <h2 class="mreveal" style="font-size:clamp(1.7rem,3.6vw,2.6rem)">The sci-fi part <span class="grad-text">finally shipped.</span></h2>
+        <p>For years a real Jarvis was impossible. In the last two it stopped being a question of "if" and became a question of "how well." Four breakthroughs converged — and Jarvis is built on all of them.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h4><span class="pd"></span>Sub-second voice</h4>
+          <p>On-device speech models (Whisper, Parakeet) now turn your words to text and back in a heartbeat — fast enough to feel like a conversation, not a command.</p>
+        </div>
+        <div class="pillar">
+          <h4><span class="pd"></span>Local-first brains</h4>
+          <p>Capable models run on a laptop or a Mac mini. The reasoning that used to need a data center can now live entirely on your machine.</p>
+        </div>
+        <div class="pillar">
+          <h4><span class="pd"></span>One open tool standard</h4>
+          <p>MCP became the way assistants plug into apps and devices. Smart tool selection means Jarvis can hold hundreds of tools without slowing down.</p>
+        </div>
+        <div class="pillar">
+          <h4><span class="pd"></span>Memory that sticks</h4>
+          <p>Persistent, personal context is now a first-class building block — so an assistant can actually know your world instead of resetting every chat.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -686,20 +866,79 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="block" id="faq" style="padding-top:0">
+  <div class="sec-bg" aria-hidden="true"><div class="grid"></div><div class="aurora a1"></div></div>
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Questions</span>
+      <h2 class="mreveal">The things <span class="grad-text">people ask first.</span></h2>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">Is it actually private?<span class="pm"></span></div>
+        <div class="faq-a">Yes — that's the point. Jarvis can run entirely on your own machine, so your voice, files, and messages never have to leave it. When you do use a cloud model for a harder request, secrets like passwords and tokens are redacted first. Your assistant, your data, your rules.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">How fast does it respond?<span class="pm"></span></div>
+        <div class="faq-a">Fast enough to feel like talking to a person — well under a second from your voice to its reply on a typical setup. The speech and reasoning run locally, so there's no round-trip lag to a far-off server. <span class="flag">[target — final latency confirmed at launch]</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">What can it connect to?<span class="pm"></span></div>
+        <div class="faq-a">Your calendar, email, messages, notes, files, music, smart home, browser, and your desktop apps — through an open tool layer (MCP) with scoped, revocable permissions. If a tool speaks MCP or has an API, Jarvis can likely use it. <span class="flag">[NEED FROM CLIENT: confirm launch integrations]</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">Do I need to be technical?<span class="pm"></span></div>
+        <div class="faq-a">No. The goal is "say the word and it works." Setup walks you through connecting your apps and choosing what Jarvis is allowed to do. Power users can go deep with custom tools and local models; everyone else just talks to it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">What does it run on?<span class="pm"></span></div>
+        <div class="faq-a">A modern laptop or desktop is enough to run Jarvis locally, with more horsepower unlocking bigger on-device models. You can also point it at a cloud model when you want maximum capability. <span class="flag">[NEED FROM CLIENT: confirm supported platforms — Mac / Windows / Linux]</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">Is this affiliated with Marvel?<span class="pm"></span></div>
+        <div class="faq-a">No. Jarvis is inspired by the idea everyone fell in love with on screen — an assistant that talks, acts, and has your back — but it's an independent product, not affiliated with or endorsed by Marvel or Disney. <span class="flag">[NEED FROM CLIENT: confirm final product name & legal review]</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">What will it cost?<span class="pm"></span></div>
+        <div class="faq-a">There's a free tier to live with day to day, and a Pro plan for people who want Jarvis running the whole day with them. Founding members lock in early-access pricing for life. <span class="flag">[NEED FROM CLIENT: final pricing & limits]</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">When can I use it?<span class="pm"></span></div>
+        <div class="faq-a">Jarvis is in private preview now, rolling out in waves. Founding-spot members get in first and help shape what ships. Join below and you'll get your invite as your wave opens. <span class="flag">[NEED FROM CLIENT: target public launch window]</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
     <div class="cta reveal brackets" id="cta">
       <div class="glow-orb"></div>
-      <span class="eyebrow" style="justify-content:center">Early access</span>
-      <h2 style="margin-top:18px">Say the word.</h2>
-      <p>Join the private preview and be among the first to live with a Jarvis of your own.</p>
+      <span class="eyebrow" style="justify-content:center">Founding access</span>
+      <h2 style="margin-top:18px">Claim your Jarvis.</h2>
+      <p>Founding spots are limited and go out in waves. Grab yours and you're first in line for a personal AI of your own — and you help decide what it becomes.</p>
+      <div class="cta-incentives">
+        <span class="inc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg> <b>First</b>&nbsp;in line for invites</span>
+        <span class="inc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg> <b>Founding pricing</b>, locked for life</span>
+        <span class="inc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg> A <b>direct say</b> in what ships</span>
+      </div>
       <form class="cta-row" id="waitlist" onsubmit="return false;">
-        <input type="email" required placeholder="you@company.com" aria-label="Email"
+        <input type="email" required placeholder="you@email.com" aria-label="Email"
           style="padding:14px 22px;border-radius:100px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--text);font-size:15px;min-width:260px;outline:none" />
-        <button class="btn btn-primary" type="submit">Request access →</button>
+        <button class="btn btn-primary" type="submit">Claim my founding spot →</button>
       </form>
-      <p style="font-size:.82rem;margin-top:16px;color:var(--muted-2)" id="formNote">No spam. We'll only reach out about your preview. <span class="flag">[NEED FROM CLIENT: connect form to a real backend/CRM]</span></p>
+      <div class="signup-meta" id="signupMeta">
+        <span class="av"><span></span><span></span><span></span></span>
+        <span><b id="joinCount">1,200</b>+ builders already on the list <span class="flag">[NEED FROM CLIENT: real count]</span></span>
+      </div>
+      <div class="form-trust">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No spam, ever</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> One email — that's it</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg> Unsubscribe anytime</span>
+      </div>
+      <p style="font-size:.78rem;margin-top:14px;color:var(--muted-2)" id="formNote"><span class="flag">[NEED FROM CLIENT: connect form to a real backend/CRM]</span></p>
     </div>
   </div>
 </section>
@@ -823,14 +1062,12 @@
   },{threshold:0.5});
   counters.forEach(c=>cio.observe(c));
 
-  /* ---------- STORY SYNC (steps + terminal) ---------- */
+  /* ---------- STORY STEPS (scroll highlight) ---------- */
   const steps = [...document.querySelectorAll('#storySteps .step')];
-  const termLines = [...document.querySelectorAll('#termBody .term-line')];
   let activeStep = -1;
   function setStep(i){
     if(i===activeStep) return; activeStep=i;
     steps.forEach((s,idx)=> s.classList.toggle('active', idx===i));
-    termLines.forEach((l,idx)=> l.classList.toggle('show', idx<=i));
   }
   setStep(0);
   if(hasGSAP){
@@ -838,6 +1075,74 @@
       ScrollTrigger.create({ trigger:s, start:'top center', end:'bottom center',
         onEnter:()=>setStep(i), onEnterBack:()=>setStep(i) });
     });
+  }
+
+  /* ---------- INTERACTIVE VOICE DEMO ---------- */
+  const demoScenarios = {
+    morning:{ user:`Hey Jarvis — catch me up.`, replies:[
+      {t:`Morning. Three meetings today, first at 10. Overnight: 12 emails, 2 need you. It's 18° and clear.`, tags:['calendar','gmail']},
+      {t:`Warming the lights and your focus playlist — and I held 8–10 for deep work, like you asked.`, tags:['home · 2 devices','memory']} ]},
+    focus:{ user:`Hey Jarvis — dim the office and play something focused.`, replies:[
+      {t:`Lights down to 30%, focus playlist on.`, tags:['home','spotify']},
+      {t:`Notifications paused for 90 minutes. I'll still surface anything from Dana or your on-call.`, tags:['do-not-disturb','memory']} ]},
+    inbox:{ user:`Hey Jarvis — clear my inbox.`, replies:[
+      {t:`Triaged 23 emails: 18 archived, 3 drafted in your voice, 2 flagged as time-sensitive.`, tags:['gmail · 23']},
+      {t:`The reply to Dana picks up your last thread. Send it, or read it to you first?`, tags:['memory · recalled context']} ]},
+    home:{ user:`Hey Jarvis — lock up for the night.`, replies:[
+      {t:`Doors locked, thermostat to 19°, downstairs lights off, garage closed.`, tags:['home · 6 devices']},
+      {t:`Alarm set for 6:40. First thing tomorrow is the 9am with Priya — your notes are ready.`, tags:['memory']} ]}
+  };
+  const termBody = document.getElementById('termBody');
+  const termState = document.getElementById('termState');
+  let demoTimers=[], demoToken=0;
+  function clearDemo(){ demoTimers.forEach(clearTimeout); demoTimers=[]; demoToken++; }
+  function lineEl(who, html){
+    const d=document.createElement('div');
+    d.className='term-line show';
+    d.innerHTML='<span class="who '+(who==='Jarvis'?'j':'')+'">'+(who==='You'?'You 🎙':'Jarvis')+'</span><span class="msg">'+html+'</span>';
+    return d;
+  }
+  function tagHtml(tags){ return tags&&tags.length ? '<br>'+tags.map(t=>'<span class="term-tag">'+t+'</span>').join(' ') : ''; }
+  function think(scn, token, idx){
+    if(token!==demoToken) return;
+    termState.textContent='thinking…';
+    const row=lineEl('Jarvis','<span class="caret"></span>'); termBody.appendChild(row);
+    demoTimers.push(setTimeout(()=>{
+      if(token!==demoToken) return;
+      const r=scn.replies[idx];
+      row.querySelector('.msg').innerHTML = r.t + tagHtml(r.tags);
+      if(idx+1<scn.replies.length){ demoTimers.push(setTimeout(()=>think(scn,token,idx+1), 720)); }
+      else { termState.textContent='done'; }
+    }, 600+Math.random()*260));
+  }
+  function playScenario(key){
+    const scn=demoScenarios[key]; if(!scn||!termBody) return;
+    clearDemo(); const token=demoToken; termBody.innerHTML='';
+    if(reduce){
+      termBody.appendChild(lineEl('You','"'+scn.user+'"'));
+      scn.replies.forEach(r=> termBody.appendChild(lineEl('Jarvis', r.t+tagHtml(r.tags))));
+      termState.textContent='done'; return;
+    }
+    const u=lineEl('You',''); const msg=u.querySelector('.msg'); termBody.appendChild(u);
+    termState.textContent='listening';
+    const text='"'+scn.user+'"'; let ci=0; msg.innerHTML='<span class="caret"></span>';
+    const typeNext=()=>{
+      if(token!==demoToken) return;
+      ci++; msg.innerHTML = text.slice(0,ci)+'<span class="caret"></span>';
+      if(ci<text.length){ demoTimers.push(setTimeout(typeNext, 24+Math.random()*36)); }
+      else { msg.innerHTML=text; demoTimers.push(setTimeout(()=>think(scn,token,0), 400)); }
+    };
+    demoTimers.push(setTimeout(typeNext, 240));
+  }
+  const demoChips=[...document.querySelectorAll('#demoChips .demo-chip')];
+  demoChips.forEach(ch=> ch.addEventListener('click', ()=>{
+    demoChips.forEach(c=>c.classList.remove('active')); ch.classList.add('active');
+    playScenario(ch.dataset.scn);
+  }));
+  const storyVisual=document.querySelector('.story-visual');
+  if(storyVisual){
+    let demoStarted=false;
+    new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting && !demoStarted){ demoStarted=true; playScenario('morning'); } }); },{threshold:0.25}).observe(storyVisual);
   }
 
   /* ---------- HERO TITLE word reveal ---------- */
@@ -1121,12 +1426,30 @@
     }
   }
 
+  /* ---------- FAQ ACCORDION ---------- */
+  document.querySelectorAll('#faqList .faq-item').forEach(item=>{
+    const q=item.querySelector('.faq-q'), a=item.querySelector('.faq-a');
+    const toggle=()=>{
+      const open=item.classList.toggle('open');
+      a.classList.toggle('show', open);
+    };
+    q.addEventListener('click', toggle);
+    q.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  });
+
   /* ---------- WAITLIST (front-end only) ---------- */
   const form = document.getElementById('waitlist');
   const note = document.getElementById('formNote');
+  const signupMeta = document.getElementById('signupMeta');
   form.addEventListener('submit', ()=>{
-    note.innerHTML = "✓ You're on the list. We'll be in touch soon. <span style='color:var(--accent-3)'>[NEED FROM CLIENT: connect to real backend]</span>";
-    form.querySelector('input').value='';
+    const input = form.querySelector('input');
+    if(!input.value || !input.checkValidity()){ input.reportValidity&&input.reportValidity(); return; }
+    const pos = 1200 + Math.floor(Math.random()*240) + 1;
+    if(signupMeta){
+      signupMeta.innerHTML = "<span style='color:var(--accent);font-weight:600'>✓ You're in.</span>&nbsp;You're <b>#"+pos.toLocaleString()+"</b> in line — watch your inbox for your wave.";
+    }
+    note.innerHTML = "Want to jump the queue? Refer a friend once we send your invite. <span class='flag'>[NEED FROM CLIENT: connect to real backend + referral]</span>";
+    input.value='';
   });
 })();
 </script>
