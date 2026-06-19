@@ -142,7 +142,8 @@
   #hero-canvas{position:absolute;inset:0;z-index:0;display:block}
   .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:
-      radial-gradient(58% 52% at 50% 46%,transparent 0%,rgba(5,7,13,.30) 72%,var(--bg) 100%),
+      radial-gradient(42% 32% at 50% 49%,rgba(5,7,13,.66) 0%,rgba(5,7,13,.32) 46%,transparent 76%),
+      radial-gradient(72% 60% at 50% 46%,transparent 0%,rgba(5,7,13,.10) 70%,var(--bg) 100%),
       linear-gradient(180deg,rgba(5,7,13,.55) 0%,transparent 22%,transparent 60%,var(--bg) 100%);
   }
   .hero-inner{position:relative;z-index:2;width:100%;text-align:center;padding:120px 28px 90px}
@@ -908,7 +909,7 @@
         geo.setAttribute('aRnd', new THREE.BufferAttribute(rnd,1));
         const pMat = new THREE.ShaderMaterial({
           transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
-          uniforms:{ uTime:{value:0}, uSize:{value:isMobile?2.0:2.5}, uMouse:{value:new THREE.Vector2()},
+          uniforms:{ uTime:{value:0}, uSize:{value:isMobile?1.8:2.2}, uMouse:{value:new THREE.Vector2()},
             uColorA:{value:new THREE.Color(0x3df2ff)}, uColorB:{value:new THREE.Color(0x6a7bff)}, uColorC:{value:new THREE.Color(0xb06bff)} },
           vertexShader:`
             uniform float uTime; uniform float uSize; uniform vec2 uMouse;
@@ -933,7 +934,7 @@
               float a=smoothstep(0.5,0.0,d);
               vec3 col=mix(uColorA,uColorB,vR);
               col=mix(col,uColorC, smoothstep(8.0,20.0,vD)*0.6);
-              gl_FragColor=vec4(col, a*(0.5+0.5*vR));
+              gl_FragColor=vec4(col, a*(0.22+0.4*vR));
             }`
         });
         points=new THREE.Points(geo,pMat);
@@ -955,14 +956,14 @@
               if(r>1.0) discard;
               float a=atan(p.y,p.x); float t=uTime;
               float g=0.0;
-              g+=smoothstep(0.16,0.0,r)*1.7;
-              g+=band(r,0.205,0.010)*1.1;
+              g+=smoothstep(0.12,0.0,r)*0.8;
+              g+=band(r,0.205,0.010)*1.0;
               float seg=step(0.5,fract((a/TAU)*48.0 + t*0.02));
-              g+=band(r,0.38,0.030)*seg*0.85;
-              g+=band(r,0.50,0.005)*0.7;
-              g+=band(r,0.63,0.008)*0.6;
+              g+=band(r,0.38,0.026)*seg*0.8;
+              g+=band(r,0.50,0.005)*0.65;
+              g+=band(r,0.63,0.008)*0.55;
               float arc=smoothstep(0.55,1.0,sin(a - t*1.1)*0.5+0.5);
-              g+=band(r,0.78,0.014)*(0.25+arc*1.3);
+              g+=band(r,0.78,0.014)*(0.22+arc*1.1);
               float seg2=step(0.72,fract((a/TAU)*90.0));
               g+=band(r,0.90,0.018)*seg2*0.6;
               float sweep=smoothstep(0.22,0.0,abs(mod(a - t*0.6 + 3.14159, TAU) - 3.14159));
@@ -973,12 +974,12 @@
               gl_FragColor=vec4(col, clamp(g,0.0,1.0));
             }`
         });
-        reactor=new THREE.Mesh(new THREE.PlaneGeometry(13,13), reactorMat);
+        reactor=new THREE.Mesh(new THREE.PlaneGeometry(9.5,9.5), reactorMat);
         group.add(reactor);
 
         /* --- bright central core for intense bloom --- */
-        const cMat=new THREE.MeshBasicMaterial({color:0xcfffff, transparent:true, opacity:0.9, blending:THREE.AdditiveBlending, depthWrite:false});
-        coreSprite=new THREE.Mesh(new THREE.SphereGeometry(0.55,24,24), cMat);
+        const cMat=new THREE.MeshBasicMaterial({color:0x9fefff, transparent:true, opacity:0.5, blending:THREE.AdditiveBlending, depthWrite:false});
+        coreSprite=new THREE.Mesh(new THREE.SphereGeometry(0.3,24,24), cMat);
         group.add(coreSprite);
 
         /* --- tilted 3D wire rings for depth --- */
@@ -987,9 +988,9 @@
             new THREE.MeshBasicMaterial({color:0x3df2ff, transparent:true, opacity:op, blending:THREE.AdditiveBlending, depthWrite:false}));
           m.rotation.x=rx; m.rotation.y=ry; group.add(m); rings.push(m); return m;
         }
-        addRing(6.6,0.012,0.5, Math.PI*0.5, 0);
-        addRing(7.4,0.010,0.32, Math.PI*0.42, 0.4);
-        addRing(8.3,0.008,0.22, Math.PI*0.58, -0.3);
+        addRing(5.3,0.012,0.42, Math.PI*0.5, 0);
+        addRing(6.1,0.010,0.28, Math.PI*0.42, 0.4);
+        addRing(6.9,0.008,0.2, Math.PI*0.58, -0.3);
 
         /* --- bloom pipeline --- */
         const w=Math.floor(innerWidth*DPR), h=Math.floor(innerHeight*DPR);
@@ -1000,7 +1001,7 @@
         fsQuad=new THREE.Mesh(new THREE.PlaneGeometry(2,2), null);
         fsScene.add(fsQuad);
         brightMat=new THREE.ShaderMaterial({
-          uniforms:{ tDiffuse:{value:null}, uThresh:{value:0.30}, uKnee:{value:0.35} },
+          uniforms:{ tDiffuse:{value:null}, uThresh:{value:0.62}, uKnee:{value:0.28} },
           vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`,
           fragmentShader:`
             precision highp float; varying vec2 vUv; uniform sampler2D tDiffuse; uniform float uThresh,uKnee;
@@ -1025,7 +1026,7 @@
         });
         compMat=new THREE.ShaderMaterial({
           transparent:true,
-          uniforms:{ tBase:{value:null}, tBloom:{value:null}, uStrength:{value:1.25} },
+          uniforms:{ tBase:{value:null}, tBloom:{value:null}, uStrength:{value:0.7} },
           vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`,
           fragmentShader:`
             precision highp float; varying vec2 vUv; uniform sampler2D tBase,tBloom; uniform float uStrength;
@@ -1033,7 +1034,7 @@
               vec3 b=texture2D(tBase,vUv).rgb;
               vec3 bl=texture2D(tBloom,vUv).rgb;
               vec3 col=b+bl*uStrength;
-              float al=clamp(max(max(col.r,col.g),col.b)*1.4, 0.0, 1.0);
+              float al=clamp(dot(col,vec3(0.34,0.5,0.5)), 0.0, 1.0);
               gl_FragColor=vec4(col, al);
             }`
         });
