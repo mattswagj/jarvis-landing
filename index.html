@@ -870,7 +870,7 @@
       let sceneRT, rtA, rtB, fsScene, fsCam, fsQuad, brightMat, blurMat, compMat;
       let running=true, rafId=null, heroScroll=0;
       const DPR = Math.min(window.devicePixelRatio||1, isMobile?1.4:1.85);
-      const COUNT = isMobile ? 2400 : 5200;
+      const COUNT = isMobile ? 1500 : 2800;
       const BLOOM_PASSES = isMobile ? 1 : 2;
       const mouse = {x:0,y:0,tx:0,ty:0};
       const clock = new THREE.Clock();
@@ -895,11 +895,11 @@
         const geo = new THREE.BufferGeometry();
         const pos = new Float32Array(COUNT*3);
         const rnd = new Float32Array(COUNT);
-        const R = 5.0;
+        const R = 4.2;
         for(let i=0;i<COUNT;i++){
           const u=Math.random(), v=Math.random();
           const theta=2*Math.PI*u, phi=Math.acos(2*v-1);
-          const rr = R*(0.55 + Math.random()*0.65);
+          const rr = R*(0.88 + Math.random()*0.42);
           pos[i*3]   = rr*Math.sin(phi)*Math.cos(theta);
           pos[i*3+1] = rr*Math.sin(phi)*Math.sin(theta);
           pos[i*3+2] = rr*Math.cos(phi);
@@ -909,7 +909,7 @@
         geo.setAttribute('aRnd', new THREE.BufferAttribute(rnd,1));
         const pMat = new THREE.ShaderMaterial({
           transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
-          uniforms:{ uTime:{value:0}, uSize:{value:isMobile?1.8:2.2}, uMouse:{value:new THREE.Vector2()},
+          uniforms:{ uTime:{value:0}, uSize:{value:isMobile?1.4:1.7}, uMouse:{value:new THREE.Vector2()},
             uColorA:{value:new THREE.Color(0x3df2ff)}, uColorB:{value:new THREE.Color(0x6a7bff)}, uColorC:{value:new THREE.Color(0xb06bff)} },
           vertexShader:`
             uniform float uTime; uniform float uSize; uniform vec2 uMouse;
@@ -934,7 +934,7 @@
               float a=smoothstep(0.5,0.0,d);
               vec3 col=mix(uColorA,uColorB,vR);
               col=mix(col,uColorC, smoothstep(8.0,20.0,vD)*0.6);
-              gl_FragColor=vec4(col, a*(0.22+0.4*vR));
+              gl_FragColor=vec4(col, a*(0.12+0.22*vR));
             }`
         });
         points=new THREE.Points(geo,pMat);
@@ -1001,7 +1001,7 @@
         fsQuad=new THREE.Mesh(new THREE.PlaneGeometry(2,2), null);
         fsScene.add(fsQuad);
         brightMat=new THREE.ShaderMaterial({
-          uniforms:{ tDiffuse:{value:null}, uThresh:{value:0.62}, uKnee:{value:0.28} },
+          uniforms:{ tDiffuse:{value:null}, uThresh:{value:0.72}, uKnee:{value:0.25} },
           vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`,
           fragmentShader:`
             precision highp float; varying vec2 vUv; uniform sampler2D tDiffuse; uniform float uThresh,uKnee;
@@ -1026,7 +1026,7 @@
         });
         compMat=new THREE.ShaderMaterial({
           transparent:true,
-          uniforms:{ tBase:{value:null}, tBloom:{value:null}, uStrength:{value:0.7} },
+          uniforms:{ tBase:{value:null}, tBloom:{value:null}, uStrength:{value:0.52} },
           vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`,
           fragmentShader:`
             precision highp float; varying vec2 vUv; uniform sampler2D tBase,tBloom; uniform float uStrength;
