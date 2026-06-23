@@ -14,6 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
 <style>
@@ -38,6 +39,7 @@
 
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
   html.lenis{height:auto}
   .lenis.lenis-smooth{scroll-behavior:auto !important}
   .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
@@ -522,7 +524,7 @@
     <div class="nav-cta">
       <a href="#" class="btn btn-ghost">Sign in</a>
       <a href="#cta" class="btn btn-primary">Request access</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-controls="drawer" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -540,7 +542,7 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <canvas id="hero-canvas"></canvas>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-veil"></div>
 
   <div class="telemetry tl" aria-hidden="true">
@@ -1027,8 +1029,8 @@
 
   const toggle = document.getElementById('menuToggle');
   const drawer = document.getElementById('drawer');
-  toggle.addEventListener('click', ()=> drawer.classList.toggle('open'));
-  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  toggle.addEventListener('click', ()=>{ const open=drawer.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{drawer.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));
 
   /* ---------- LENIS SMOOTH SCROLL (synced to gsap ticker) ---------- */
   let lenis = null;
