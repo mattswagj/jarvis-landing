@@ -1558,5 +1558,102 @@
   });
 })();
 </script>
+
+<!-- TALK TO JARVIS — voice demo (Web Speech API). Self-contained, namespaced ttj-. -->
+<div id="ttj-root" aria-live="polite">
+  <button id="ttj-launch" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ttj-panel">
+    <span class="ttj-dot" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path fill="currentColor" d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 1 0 2 0v-3.08A7 7 0 0 0 19 11Z"/></svg>
+    <span>Talk to Jarvis</span>
+  </button>
+  <div id="ttj-panel" role="dialog" aria-modal="false" aria-label="Talk to Jarvis voice demo" hidden>
+    <div class="ttj-head">
+      <div class="ttj-title"><i></i><span>jarvis</span> <em>voice demo</em></div>
+      <button id="ttj-close" type="button" aria-label="Close voice demo">&times;</button>
+    </div>
+    <div class="ttj-note">Voice demo — full AI assistant coming soon. Answers are scripted from this page.</div>
+    <div id="ttj-log" class="ttj-log" aria-live="polite"></div>
+    <div class="ttj-status"><span id="ttj-state" class="ttj-state">Tap the mic and ask me something.</span></div>
+    <div class="ttj-controls">
+      <button id="ttj-mic" type="button" class="ttj-mic" aria-pressed="false" aria-label="Start listening">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path fill="currentColor" d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 1 0 2 0v-3.08A7 7 0 0 0 19 11Z"/></svg>
+      </button>
+    </div>
+    <form id="ttj-form" class="ttj-form" autocomplete="off">
+      <input id="ttj-text" type="text" placeholder="…or type your question" aria-label="Type your question for Jarvis" />
+      <button type="submit" aria-label="Send">Ask</button>
+    </form>
+  </div>
+</div>
+<style>
+  #ttj-root{position:fixed;right:20px;bottom:20px;z-index:9999;font-family:inherit}
+  #ttj-launch{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:linear-gradient(135deg,var(--accent,#3df2ff),var(--accent-2,#6a7bff));color:#05070d;border:none;font-weight:700;font-size:15px;cursor:pointer;letter-spacing:.2px;box-shadow:0 8px 30px rgba(61,242,255,.35),0 2px 8px rgba(0,0,0,.4);transition:transform .25s var(--ease,ease),box-shadow .25s ease}
+  #ttj-launch:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(61,242,255,.5)}
+  #ttj-launch .ttj-dot{width:9px;height:9px;border-radius:50%;background:#05070d;opacity:.85}
+  #ttj-panel{position:absolute;right:0;bottom:64px;width:340px;max-width:calc(100vw - 32px);background:var(--panel,#0c1019);border:1px solid var(--line-2,rgba(255,255,255,.14));border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.6);overflow:hidden;color:var(--text,#eef2fb)}
+  #ttj-panel[hidden]{display:none}
+  .ttj-head{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line,rgba(255,255,255,.08));background:var(--panel-2,#10151f)}
+  .ttj-title{display:flex;align-items:center;gap:7px;font-family:var(--mono,monospace);font-size:13px;letter-spacing:.5px;text-transform:lowercase}
+  .ttj-title i{width:8px;height:8px;border-radius:50%;background:var(--accent,#3df2ff);box-shadow:0 0 10px var(--glow,rgba(61,242,255,.55))}
+  .ttj-title em{color:var(--muted,#9aa4bd);font-style:normal;font-size:11px;border:1px solid var(--line-2,rgba(255,255,255,.14));border-radius:6px;padding:1px 6px}
+  #ttj-close{background:none;border:none;color:var(--muted,#9aa4bd);font-size:22px;line-height:1;cursor:pointer;padding:0 4px}
+  #ttj-close:hover{color:var(--text,#eef2fb)}
+  .ttj-note{font-size:11px;color:var(--muted-2,#6b7490);padding:8px 14px 0;line-height:1.4}
+  .ttj-log{padding:12px 14px;max-height:230px;min-height:96px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+  .ttj-msg{font-size:13.5px;line-height:1.45;padding:9px 12px;border-radius:12px;max-width:88%}
+  .ttj-msg.u{align-self:flex-end;background:linear-gradient(135deg,var(--accent,#3df2ff),var(--accent-2,#6a7bff));color:#05070d;font-weight:600}
+  .ttj-msg.j{align-self:flex-start;background:var(--panel-2,#10151f);border:1px solid var(--line,rgba(255,255,255,.08));color:var(--text,#eef2fb)}
+  .ttj-status{padding:0 14px}
+  .ttj-state{font-size:12px;color:var(--muted,#9aa4bd);font-family:var(--mono,monospace)}
+  .ttj-controls{display:flex;justify-content:center;padding:12px 14px 6px}
+  .ttj-mic{width:62px;height:62px;border-radius:50%;border:1px solid var(--line-2,rgba(255,255,255,.14));background:var(--panel-2,#10151f);color:var(--accent,#3df2ff);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+  .ttj-mic:hover{transform:scale(1.05)}
+  .ttj-mic.live{background:linear-gradient(135deg,var(--accent,#3df2ff),var(--accent-2,#6a7bff));color:#05070d;animation:ttj-pulse 1.4s infinite}
+  .ttj-mic.speak{color:var(--accent-3,#b06bff);border-color:var(--accent-3,#b06bff)}
+  @keyframes ttj-pulse{0%{box-shadow:0 0 0 0 rgba(61,242,255,.5)}70%{box-shadow:0 0 0 16px rgba(61,242,255,0)}100%{box-shadow:0 0 0 0 rgba(61,242,255,0)}}
+  .ttj-form{display:flex;gap:8px;padding:8px 14px 14px}
+  .ttj-form input{flex:1;background:var(--bg,#05070d);border:1px solid var(--line-2,rgba(255,255,255,.14));border-radius:10px;color:var(--text,#eef2fb);padding:9px 11px;font-size:13px;font-family:inherit}
+  .ttj-form input:focus{outline:none;border-color:var(--accent,#3df2ff)}
+  .ttj-form button{background:var(--panel-2,#10151f);border:1px solid var(--line-2,rgba(255,255,255,.14));color:var(--text,#eef2fb);border-radius:10px;padding:0 14px;font-size:13px;font-weight:600;cursor:pointer}
+  .ttj-form button:hover{border-color:var(--accent,#3df2ff)}
+  @media (prefers-reduced-motion: reduce){#ttj-launch,.ttj-mic{transition:none}.ttj-mic.live{animation:none;box-shadow:0 0 0 3px rgba(61,242,255,.4)}}
+</style>
+<script>
+(function(){
+  var launch=document.getElementById('ttj-launch'),panel=document.getElementById('ttj-panel'),closeBtn=document.getElementById('ttj-close'),micBtn=document.getElementById('ttj-mic'),stateEl=document.getElementById('ttj-state'),logEl=document.getElementById('ttj-log'),form=document.getElementById('ttj-form'),textIn=document.getElementById('ttj-text');
+  if(!launch||!panel) return;
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;var supportsSR=!!SR;var synth=window.speechSynthesis||null;var recog=null,listening=false,greeted=false,jVoice=null;
+  function pickVoice(){if(!synth)return;var vs=synth.getVoices()||[];if(!vs.length)return;jVoice=vs.find(function(v){return /en-US/i.test(v.lang)&&/(Google US English|Samantha|Microsoft (Aria|Jenny|Zira))/i.test(v.name);})||vs.find(function(v){return v.lang==='en-US';})||vs.find(function(v){return /^en[-_]/i.test(v.lang);})||vs[0];}
+  if(synth){pickVoice();if(typeof synth.onvoiceschanged!=='undefined'){synth.onvoiceschanged=pickVoice;}}
+  function setState(t){stateEl.textContent=t;}
+  function addMsg(who,text){var d=document.createElement('div');d.className='ttj-msg '+(who==='you'?'u':'j');d.textContent=(who==='you'?'You: ':'Jarvis: ')+text;logEl.appendChild(d);logEl.scrollTop=logEl.scrollHeight;}
+  function speak(text){if(!synth){return;}try{synth.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=1.02;u.pitch=1;if(jVoice)u.voice=jVoice;u.onstart=function(){micBtn.classList.add('speak');setState('Speaking…');};u.onend=function(){micBtn.classList.remove('speak');if(!listening)setState('Tap the mic and ask me something.');};synth.speak(u);}catch(e){}}
+  function respond(qRaw){var q=(qRaw||'').toLowerCase();function has(){for(var i=0;i<arguments.length;i++){if(q.indexOf(arguments[i])>-1)return true;}return false;}
+    if(has('hello','hey jarvis','hi ','hey there')||q.trim()==='hi'||q.trim()==='hey'){return "Hi, I'm Jarvis. Ask me what I can do, how I work, what I connect to, or how to get access.";}
+    if(has('what can you do','what is jarvis','who are you','what are you','about you')){return "I'm Jarvis — a personal AI like the one from the films, finally real. I'm always on, I run on-device and private by default, I remember what matters, and I take real action across your apps.";}
+    if(has('how do you work','how does it work','how it works','how do i use')){return "It's four beats every time: wake, understand, act, remember. Say 'Hey Jarvis' and talk naturally — I figure out what you mean, do it across your apps, and remember it for next time.";}
+    if(has('connect','integrat','work with','apps','smart home','calendar','email','thermostat','lights')){return "I work across your apps — email, calendar, the web, your browser, and your desktop. I can also run your smart home: lights, music, scenes, the thermostat. Everything with scoped, revocable permissions.";}
+    if(has('price','pricing','cost','how much','access','sign up','signup','get access','join','founding','waitlist','invite')){return "Jarvis is in private preview right now. You can claim a founding spot from this page — just drop your email and you'll be first in line when invites go out.";}
+    if(has('private','privacy','secure','security','on device','on-device','data','safe')){return "Privacy is the default. I can run 100% on-device, so your data stays with you, and every connection uses scoped, revocable permissions.";}
+    if(has('voice','speak','talk','listen','wake word')){return "Yes — just say 'Hey Jarvis' and talk naturally, even mid-sentence. This little demo is a preview of that voice loop.";}
+    if(has('films','movie','iron man','marvel','real')){return "Exactly — the assistant everyone fell in love with on screen, built for your real life. Not affiliated with Marvel or Disney, just inspired by the idea.";}
+    if(has('thank')){return "Anytime. Claim a founding spot on this page and I'll see you on the inside.";}
+    return "Good question. I'm a scripted voice demo for now, so try asking what I can do, how I work, what I connect to, or how to get access — the full AI assistant is coming soon.";}
+  function handle(query){if(!query||!query.trim())return;addMsg('you',query.trim());var reply=respond(query);setTimeout(function(){addMsg('jarvis',reply);speak(reply);},220);}
+  function buildRecognition(){recog=new SR();recog.lang='en-US';recog.interimResults=true;recog.continuous=false;recog.maxAlternatives=1;var finalText='';
+    recog.onstart=function(){listening=true;micBtn.classList.add('live');micBtn.setAttribute('aria-pressed','true');micBtn.setAttribute('aria-label','Stop listening');setState('Listening…');finalText='';};
+    recog.onresult=function(e){var interim='';for(var i=e.resultIndex;i<e.results.length;i++){var r=e.results[i];if(r.isFinal)finalText+=r[0].transcript;else interim+=r[0].transcript;}setState('“'+(finalText||interim).trim()+'”');};
+    recog.onerror=function(e){listening=false;micBtn.classList.remove('live');micBtn.setAttribute('aria-pressed','false');if(e&&e.error==='not-allowed'){setState('Mic blocked — type your question below instead.');}else if(e&&e.error==='no-speech'){setState('Didn’t catch that — tap the mic and try again.');}else{setState('Voice unavailable — type your question below.');}};
+    recog.onend=function(){listening=false;micBtn.classList.remove('live');micBtn.setAttribute('aria-pressed','false');micBtn.setAttribute('aria-label','Start listening');if(finalText&&finalText.trim()){handle(finalText);}else if(stateEl.textContent==='Listening…'){setState('Tap the mic and ask me something.');}};}
+  function startListening(){if(!supportsSR){setState('Voice input isn’t supported here — type your question below.');textIn&&textIn.focus();return;}if(listening){try{recog.stop();}catch(e){}return;}if(!recog)buildRecognition();try{recog.start();}catch(e){}}
+  micBtn.addEventListener('click',startListening);
+  form.addEventListener('submit',function(e){e.preventDefault();var v=textIn.value;textIn.value='';handle(v);});
+  function openPanel(){panel.hidden=false;launch.setAttribute('aria-expanded','true');if(!greeted){greeted=true;var hi=supportsSR?"Hi, I'm Jarvis. Tap the mic and ask me something — or type below.":"Hi, I'm Jarvis. Your browser doesn’t support voice input, so type your question below and I’ll reply.";addMsg('jarvis',hi);setState(supportsSR?'Tap the mic and ask me something.':'Type your question below.');if(!supportsSR){micBtn.disabled=true;micBtn.style.opacity='.4';micBtn.style.cursor='not-allowed';}}}
+  function closePanel(){panel.hidden=true;launch.setAttribute('aria-expanded','false');if(synth)synth.cancel();if(listening){try{recog.stop();}catch(e){}}}
+  launch.addEventListener('click',function(){panel.hidden?openPanel():closePanel();});
+  closeBtn.addEventListener('click',closePanel);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden)closePanel();});
+})();
+</script>
 </body>
 </html>
